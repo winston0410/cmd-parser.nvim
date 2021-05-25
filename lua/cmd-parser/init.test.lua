@@ -11,6 +11,12 @@ describe('when parse_cmd is called', function()
        function() expect.equal(type(result), "table") end)
 end)
 
+describe('when it is called without range', function()
+	local result = parse_cmd("d")
+	it('should return empty start range',
+	function() expect.equal(result.start_range, nil) end)
+end)
+
 describe('when it is called with single number range', function()
     local result = parse_cmd("23d")
     it('should return the start range',
