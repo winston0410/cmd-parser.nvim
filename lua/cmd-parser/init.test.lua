@@ -19,6 +19,16 @@ describe('when it is called without range', function()
 	function() expect.equal(result.start_range_type, nil) end)
 end)
 
+describe('when it is called with shorthand range', function ()
+	local result = parse_cmd(",20d")
+	it('should return start range as .', function ()
+		expect.equal(result.start_range, ".")
+	end)
+	it('should return start range type', function ()
+		expect.equal(result.start_range_type, ".")
+	end)
+end)
+
 describe('when it is called with single number range', function()
     local result = parse_cmd("23d")
     it('should return the start range',
