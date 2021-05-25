@@ -15,6 +15,8 @@ describe('when it is called with single number range', function()
     local result = parse_cmd("23d")
     it('should return the start range',
        function() expect.equal(result.start_range, "23") end)
+    it('should return the start range type',
+       function() expect.equal(result.start_range_type, "number") end)
     it('should return the command',
        function() expect.equal(result.command, "d") end)
 end)
@@ -37,6 +39,8 @@ describe('when it is called with a complete number range', function()
        function() expect.equal(result.start_range, "10") end)
     it('should return the end range',
        function() expect.equal(result.end_range, "20") end)
+    it('should return the end range type',
+       function() expect.equal(result.end_range_type, "number") end)
     it('should return the command',
        function() expect.equal(result.command, "d") end)
 end)
@@ -57,6 +61,8 @@ describe('when it is called with single mark range', function()
     local result = parse_cmd("'ad")
     it('should return the start range',
        function() expect.equal(result.start_range, "'a") end)
+    it('should return the start range type',
+       function() expect.equal(result.start_range_type, "mark") end)
     it('should return the command',
        function() expect.equal(result.command, "d") end)
 end)
@@ -77,6 +83,8 @@ describe('when it is called with a complete mark range', function()
        function() expect.equal(result.start_range, "'a") end)
     it('should return the end range',
        function() expect.equal(result.end_range, "'b") end)
+    it('should return the end range type',
+       function() expect.equal(result.end_range_type, "mark") end)
     it('should return the command',
        function() expect.equal(result.command, "t") end)
 end)
@@ -99,6 +107,8 @@ describe('when it is called with single forward search range', function()
     local result = parse_cmd("/hello/d")
     it('should return the start range',
        function() expect.equal(result.start_range, "/hello/") end)
+    it('should return the start range type',
+       function() expect.equal(result.start_range_type, "forward_search") end)
     it('should return the command',
        function() expect.equal(result.command, "d") end)
 end)
@@ -117,6 +127,8 @@ describe('when it is called with single backward search range', function()
     local result = parse_cmd("?hello?pu")
     it('should return the start range',
        function() expect.equal(result.start_range, "?hello?") end)
+    it('should return the start range type',
+       function() expect.equal(result.start_range_type, "backward_search") end)
     it('should return the command',
        function() expect.equal(result.command, "pu") end)
 end)
@@ -135,6 +147,8 @@ describe('when it is called with single special range', function()
     local result = parse_cmd("%y")
     it('should return the start range',
        function() expect.equal(result.start_range, "%") end)
+    it('should return the start range type',
+       function() expect.equal(result.start_range_type, "%") end)
     it('should return the command',
        function() expect.equal(result.command, "y") end)
 end)

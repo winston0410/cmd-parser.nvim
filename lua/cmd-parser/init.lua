@@ -9,19 +9,25 @@ local range_patterns = {
     special_range, number_range, mark_range, forward_search_range,
     backward_search_range
 }
+local range_patterns_type = {
+	"special", "number", "mark", "forward_search", "backward_search"
+}
 
 local function get_range(index, cmd)
-    local range
-    for _, pattern in ipairs(range_patterns) do
-        local _, end_index, result = string.find(cmd, pattern, index)
-        -- print('check result', pattern, end_index, result)
+    local range, type
+    for i=1, #range_patterns do
+        local _, end_index, result = string.find(cmd, range_patterns[i], index)
         if end_index then
             index = end_index
             range = result
+			type = range_patterns_type[i]
             break
         end
     end
-    return range, index + 1
+	if type == "special" then
+		type = range
+	end
+    return range, type, index + 1
 end
 
 local function update_increment(operator, increment, acc_text, acc_num)
@@ -49,7 +55,7 @@ end
 local function parse_cmd(cmd)
     local result, next_index, _ = {}, 1, nil
     local start_range_text, end_range_text
-    result.start_range, next_index = get_range(1, cmd)
+    result.start_range, result.start_range_type, next_index = get_range(1, cmd)
 
     local comma_index = string.find(cmd, '[;,]', next_index)
     if comma_index then
@@ -62,7 +68,7 @@ local function parse_cmd(cmd)
     if comma_index then
         -- To offset the comma_index
         next_index = next_index + 1
-        result.end_range, next_index = get_range(next_index, cmd)
+        result.end_range, result.end_range_type, next_index = get_range(next_index, cmd)
         result.end_increment, result.end_increment_number, next_index =
             get_increment(next_index, cmd)
     end
