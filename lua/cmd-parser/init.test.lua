@@ -13,8 +13,10 @@ end)
 
 describe('when it is called without range', function()
 	local result = parse_cmd("d")
-	it('should return empty start range',
+	it('should return nil start range',
 	function() expect.equal(result.start_range, nil) end)
+	it('should return nil start range type',
+	function() expect.equal(result.start_range_type, nil) end)
 end)
 
 describe('when it is called with single number range', function()
