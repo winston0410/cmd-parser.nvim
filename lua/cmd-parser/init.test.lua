@@ -11,6 +11,24 @@ describe('when parse_cmd is called', function()
        function() expect.equal(type(result), "table") end)
 end)
 
+describe('when it is called without range', function()
+	local result = parse_cmd("d")
+	it('should return nil start range',
+	function() expect.equal(result.start_range, nil) end)
+	it('should return nil start range type',
+	function() expect.equal(result.start_range_type, nil) end)
+end)
+
+describe('when it is called with shorthand range', function ()
+	local result = parse_cmd(",20d")
+	it('should return start range as .', function ()
+		expect.equal(result.start_range, ".")
+	end)
+	it('should return start range type', function ()
+		expect.equal(result.start_range_type, ".")
+	end)
+end)
+
 describe('when it is called with single number range', function()
     local result = parse_cmd("23d")
     it('should return the start range',
