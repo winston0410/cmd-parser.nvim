@@ -1,5 +1,5 @@
 local number_range = "^(%d+)"
-local mark_range = "^('%l)"
+local mark_range = "^('[%l><])"
 local forward_search_range = "^(/.*/)"
 local backward_search_range = "^(?.*?)"
 local special_range = "^([%%%.$])"

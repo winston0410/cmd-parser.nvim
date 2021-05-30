@@ -171,5 +171,19 @@ describe('when it is called with single special range', function()
     end)
 end)
 
+-- Bug test: mark range '<,'> cannot be detected
+describe('when it is called with complete mark range', function ()
+	local result = parse_cmd("'<,'>")
+	it('should return the start range type', function ()
+		expect.equal(result.start_range_type, "mark")
+	end)
+	it('should return the start range', function()
+		expect.equal(result.start_range, "'<")
+	end)
+	it('should return the end range', function()
+		expect.equal(result.end_range, "'>")
+	end)
+end)
+
 lester.report() -- Print overall statistic of the tests run.
 lester.exit() -- Exit with success if all tests passed.
