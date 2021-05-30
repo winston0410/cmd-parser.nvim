@@ -59,6 +59,10 @@ local function parse_cmd(cmd)
 
     local comma_index = string.find(cmd, '[;,]', next_index)
     if comma_index then
+        if not result.start_range then
+            result.start_range = "."
+            result.start_range_type = "."
+        end
         start_range_text = string.sub(cmd, 1, comma_index)
     else
         start_range_text = cmd
