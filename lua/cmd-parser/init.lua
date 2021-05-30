@@ -1,5 +1,5 @@
 local number_range = "^(%d+)"
-local mark_range = "^('%l)"
+local mark_range = "^('[%l><])"
 local forward_search_range = "^(/.*/)"
 local backward_search_range = "^(?.*?)"
 local special_range = "^([%%%.$])"
@@ -59,10 +59,10 @@ local function parse_cmd(cmd)
     comma_index, _, result.separator = string.find(cmd, '[(;,)]', next_index)
 
     if comma_index then
-        if not result.start_range then 
-			result.start_range = "." 
-			result.start_range_type = "." 
-		end
+        if not result.start_range then
+            result.start_range = "."
+            result.start_range_type = "."
+        end
         start_range_text = string.sub(cmd, 1, comma_index)
     else
         start_range_text = cmd
