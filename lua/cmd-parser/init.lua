@@ -74,6 +74,10 @@ local function parse_cmd(cmd)
         next_index = next_index + 1
         result.end_range, result.end_range_type, next_index =
             get_range(next_index, cmd)
+        if not result.end_range then
+            result.end_range = "."
+            result.end_range_type = "."
+        end
         result.end_increment, result.end_increment_number, next_index =
             get_increment(next_index, cmd)
     end
